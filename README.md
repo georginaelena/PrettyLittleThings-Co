@@ -11,8 +11,9 @@ Saya akan menjelaskan beberapa poin-poin berikut:
 
 # Implementasi dalam proses pembuatan proyek Django: PrettyLittleThings-Co
 <details>
-<summary> Pembuatan Projek Django
-Membuat suatu repository baru di GitHub dengan nama "PrettyLittleThings-Co" lalu diclone di local. Kemudian saya membuat file `requirements.txt` pada folder direktori local saya dan menuliskan requirements yang diperlukan dari tutorial, yaitu
+<summary>Pembuatan Projek Django</summary> 
+Membuat suatu repository baru di GitHub dengan nama "PrettyLittleThings-Co" lalu diclone di local. Kemudian saya membuat file `requirements.txt` pada folder direktori local saya dan menuliskan requirements yang diperlukan dari tutorial, yaitu:
+
 ```
 django
 gunicorn
@@ -31,21 +32,23 @@ Setelah itu, saya lanjut untuk mendownload dengan menjalankan command:
 Pada poin terakhir, command tersebut nantinya akan berisi file-file pendukung proyek.
 
 Setelah itu saya menguji deploy di localhost dengan melakukan command`./manage.py runserver` lalu klik `http://localhost:8000`. Jika terlihat ada roket dengan tulisan succesful, maka deploy berhasil🤩
+</details>
 <details>
+<summary>Membuat dan Menjalankan Aplikasi</summary> 
+Selanjutnya, saya mengubah `ALLOWED_HOSTS` di file `settings.py` dengan menambahkan `"*"` agar proyek ini bisa dijalankan di domain apapun:
 
-<details>
-<summary> Membuat dan Menjalankan Aplikasi
-Selanjutnya, saya mengubah `ALLOWED_HOSTS` di file `settings.py` dengan menambahkan `"*"` agar proyek ini bisa dijalankan di domain apapun.
 ```
 ALLOWED_HOSTS = ["*"]
 ```
 
 jalankan command:
+
 ```
 python3 manage.py startapp main
 ```
 
 sehingga terbentuk folder `main` di root repository. Tambahkan nama aplikasi di folder `inventory_co` di file `settings.py` pada bagian `INSTALLED_APPS`, seperti berikut:
+
 ```
 INSTALLED_APPS = [
     ...,
@@ -53,11 +56,11 @@ INSTALLED_APPS = [
     ...
 ]
 ```
+</details>
 <details>
-
-<details>
-<summary> Membuat Model Aplikasi Main
+<summary>Membuat Model Aplikasi Main</summary> 
 Saya melakukan modifikasi pada file `models.py` di folder `main` dengan menambahkan kode;
+
 ```
 class Item(models.Model):
     name = models.CharField(max_length=255)
@@ -66,17 +69,19 @@ class Item(models.Model):
 ```
 
 Kemudian, agar Django dapat menyesuaikan struktur basis data dengan model yang baru dibuat, lakukan migrate dengan menjalankan command:
+
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
 Maka, model pada aplikasi dan basis data telah sesuai dengan yang kita inginkan.
-<details>
+</details>
 
 <details>
-<summary> Melakukan Routing
+<summary>Melakukan Routing</summary> 
 Proses routing dilakukan melalui file `urls.py` pada folder main dengan mengisi dengan kode berikut:
+
 ```
 from django.urls import path
 from main.views import show_main
@@ -86,12 +91,10 @@ app_name = 'main'
 urlpatterns = [
     path('', show_main, name='show_main'),
 ]
-
 ```
 
-Function `show_main` bertujuan untuk menampilkan aplikasi dengan mengakses `main.views`.
+Function `show_main` bertujuan untuk menampilkan aplikasi dengan mengakses `main.views`. Lalu, lakukan proses routing pada file `urls.py` di direktori `inventory_co` dan isi dengan kode:
 
-Lalu, lakukan proses routing pada file `urls.py` di direktori `inventory_co` dan isi dengan kode:
 ```
 from django.contrib import admin
 from django.urls import path, include
@@ -100,21 +103,19 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls'))
 ]
-
 ```
 
+</details>
 <details>
+<summary>Membuat Fungsi main.html dan views.py</summary>
 
-
-<details>
-<summary> Membuat Fungsi main.html dan views.py
-
-<details>
+</details>
 
 
 <details>
-<summary> Melakukan Deployment
+<summary>Melakukan Deployment</summary>
 Cek kembali aplikasi sebelum melakukan deployment dengan menjalankan command:
+
 ```
 python3 manage.py runserver
 ```
@@ -122,6 +123,7 @@ python3 manage.py runserver
 lalu masuk ke server `http://localhost:8000/main/`
 
 Jika aplikasi dapat berjalan dengan baik, lanjutkan dengan melakukan add, commit, dan push ke dalam repository:
+
 ```
 git add .
 git commit -m "the main app"
@@ -129,18 +131,19 @@ git push -u origin master
 ```
 
 Terakhir, saya melakukan deploy di Adaptable. Dimulai dengan  menggunakan Python App Template dengan menklik `+NEW APP`, lalu connect dengan repositori pilihan, kemudian memilih `Python App Template`, kemudian pilih opsi `PostgreSQL`. Kalian diminta untuk mengecek python version kalian dengan command:
+
 ```
 python3 --version
 ```
 
 Setelah itu, isi bagian command dengan:
+
 ```
 python manage.py migrate && gunicorn PrettyLittleThings-Co.wsgi
 ```
 
 Tunggu aplikasi hingga proses deploy selesai.
-<details>
-
+</details>
 
 
 

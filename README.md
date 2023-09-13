@@ -201,24 +201,24 @@ Terdapat komponen `client`, `urls.py`, `views.py`, `models.py`, serta berkas htm
 # Alasan penggunaan Virtual Environment
 Pada Django, virtual environment memiliki banyak manfaat yang digunakan dalam pengembangan Python bagi para pengguna. Manfaat berupa:
 
-- **Isolasi Dependensi**
+- **Isolasi Dependensi.**
     Dapat memungkinkan kita untuk menciptakan lingkungan pengembangan terisolasi di mana setiap proyek memiliki dependensi Python yang independen sehingga dapat menghindari konflik antara versi paket yang berbeda di berbagai proyek. Dalam virtual environment, kita dapat mengelola data secara terpisah untuk setiap proyek, membuat manajemen dependensi lebih mudah, dan mengurangi risiko masalah kompatibilitas.
 
-- **Reproducible Environment**: 
+- **Reproducible Environment.**: 
     Dapat membuat environment pengembangan yang dapat direplikasi dengan mudah di mesin lain atau oleh rekan tim. Hal ini dapat memastikan bahwa suatu proyek mampu dijalankan dengan benar di berbagai environment.
 
-- **Keamanan dan Stabilitas**: 
+- **Keamanan dan Stabilitas.**: 
     Dapat melindungi sistem operasi dari perubahan tak terduga yang dapat disebabkan oleh proyek Python yang tidak terkendali. Hal ini dapat menjaga stabilitas dari environment proyek yang sedang kita jalankan.
 
 Tanpa virtual environment, kita tetap dapat membuat aplikasi web berbasis Django. Namun, sangat tidak disarankan karena tanpa virtual environment, terdapat beberapa risiko serta potensi masalah yang dapat terjadi, seperti:
 
-- **Konflik Dependensi**: 
+- **Konflik Dependensi.**: 
     Proyek Django yang berbeda mungkin memerlukan versi yang berbeda dari paket Python atau library tertentu sehingga proyek-proyek tersebut dapat saling mempengaruhi dan menimbulkan konflik dependensi.
 
-- **Kesulitan Manajemen Dependensi**: 
+- **Kesulitan Manajemen Dependensi.**: 
     Manajemen dependensi proyek akan menjadi lebih sulit karena kita harus memantau dan mengelola semua dependensi global di tingkat sistem.
 
-- **Kurangnya Reproducibility**: 
+- **Kurangnya Reproducibility.**: 
     Sulit memastikan bahwa proyek dapat dijalankan dengan benar di environment pengembangan yang berbeda sehingga menimbulkan kemungkinan masalah ketika kita ingin berbagi proyek atau mengerjakannya di tempat lain.
 
 

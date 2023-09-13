@@ -146,8 +146,9 @@ Tunggu aplikasi hingga proses deploy selesai.
 </details>
 
 
-
 # Bagan request client ke web aplikasi berbasis Django beserta responnya
+[Bagan](https://i.imgur.com/ltmg32e.png)
+Terdapat komponen `client`, `urls.py`, `views.py`, `models.py`, serta berkas html `main.html` yang menjadi bagian dari berjalannya sistem. Sistem dimulai dengan **request** yang dikirimkan oleh `client` ke `urls.py` untuk mengolah file request yang kemudian dilanjutkan ke `views.py`. Pada `views.py` memproses data, mengambil data dari database, kemudian lanjut ke `models.py` dan merender berkas `main.html`.
 
 
 # Alasan penggunaan Virtual Environment

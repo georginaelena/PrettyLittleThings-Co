@@ -77,7 +77,60 @@ python3 manage.py migrate
 
 Maka, model pada aplikasi dan basis data telah sesuai dengan yang kita inginkan.
 </details>
+<details>
+<summary>Membuat Fungsi main.html dan views.py</summary>
+Saya membuat direktori baru bernama `templates` di dalam direktori aplikasi main. Di dalam direktori `templates`, saya membuat berkas baru bernama `main.html` dengan isi:
 
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi! It's Pretty Little Things Here~</title>
+</head>
+<body>
+    <h1>{{judul}}</h1>
+
+    <h5>Seller name: </h5>
+    <p>{{ name }}<p>
+
+    <h5>The Items: </h5>
+    <p>{{ item }}<p>
+
+    <h5>Price: </h5>
+    <p>{{ price }}<p>
+
+    <h5>Address: </h5>
+    <p>{{ adress }}<p>
+
+</body>
+</html>
+```
+
+Kemudian pada file `views.py` pada aplikasi `main` saya menambahkan impor:
+
+```
+from django.shortcuts import render
+```
+
+serta menambahkan fungsi `show_main` sebagai berikut:
+
+```
+def show_main(request):
+    context = {
+        'judul': 'Hi! It is Pretty Little Things Here~',
+        'name': 'Elena',
+        'item': 'DIY Bracellet',
+        'amount': '10',
+        'price': ' Rp10.000,-',
+        'adress': 'Jl. Yu'
+    }
+
+    return render(request, "main.html", context)
+```
+
+</details>
 <details>
 <summary>Melakukan Routing</summary> 
 Proses routing dilakukan melalui file `urls.py` pada folder main dengan mengisi dengan kode berikut:
@@ -106,12 +159,6 @@ urlpatterns = [
 ```
 
 </details>
-<details>
-<summary>Membuat Fungsi main.html dan views.py</summary>
-
-</details>
-
-
 <details>
 <summary>Melakukan Deployment</summary>
 Cek kembali aplikasi sebelum melakukan deployment dengan menjalankan command:
@@ -152,56 +199,54 @@ Terdapat komponen `client`, `urls.py`, `views.py`, `models.py`, serta berkas htm
 
 
 # Alasan penggunaan Virtual Environment
-Virtual environment digunakan dalam pengembangan Python (termasuk aplikasi web berbasis Django) karena memiliki beberapa manfaat:
+Pada Django, virtual environment memiliki banyak manfaat yang digunakan dalam pengembangan Python bagi para pengguna. Manfaat berupa:
 
-- **Isolasi Dependensi**: Virtual environment memungkinkan kita untuk menciptakan lingkungan pengembangan yang terisolasi sehingga memungkinkan setiap proyek memiliki dependensi dan paket Python yang independen. Dengan demikian, kita dapat mencegah konflik antara versi paket yang berbeda di berbagai proyek. Dalam virtual environment, kita dapat menginstal, menghapus, atau memperbarui paket Python secara terpisah untuk setiap proyek yang membuat manajemen dependensi proyek menjadi lebih mudah dan meminimalkan risiko masalah kompatibilitas.
+- **Isolasi Dependensi**
+    Dapat memungkinkan kita untuk menciptakan lingkungan pengembangan terisolasi di mana setiap proyek memiliki dependensi Python yang independen sehingga dapat menghindari konflik antara versi paket yang berbeda di berbagai proyek. Dalam virtual environment, kita dapat mengelola data secara terpisah untuk setiap proyek, membuat manajemen dependensi lebih mudah, dan mengurangi risiko masalah kompatibilitas.
 
-- **Reproducible Environment**: membuat environment pengembangan yang dapat direplikasi dengan mudah di mesin lain atau oleh rekan tim. Ini penting untuk memastikan bahwa suatu proyek dapat dijalankan dengan benar di berbagai lingkungan.
+- **Reproducible Environment**: 
+    Dapat membuat environment pengembangan yang dapat direplikasi dengan mudah di mesin lain atau oleh rekan tim. Hal ini dapat memastikan bahwa suatu proyek mampu dijalankan dengan benar di berbagai environment.
 
-- **Keamanan dan Stabilitas**: Virtual environment melindungi sistem operasi dari perubahan tak terduga yang dapat disebabkan oleh proyek Python yang tidak terkendali. Ini memastikan stabilitas lingkungan pengembangan proyek.
+- **Keamanan dan Stabilitas**: 
+    Dapat melindungi sistem operasi dari perubahan tak terduga yang dapat disebabkan oleh proyek Python yang tidak terkendali. Hal ini dapat menjaga stabilitas dari environment proyek yang sedang kita jalankan.
 
 Tanpa virtual environment, kita tetap dapat membuat aplikasi web berbasis Django. Namun, sangat tidak disarankan karena tanpa virtual environment, terdapat beberapa risiko serta potensi masalah yang dapat terjadi, seperti:
 
-- **Konflik Dependensi**: Proyek Django yang berbeda mungkin memerlukan versi yang berbeda dari paket Python atau library tertentu. Tanpa virtual environment, proyek-proyek tersebut dapat saling mempengaruhi dan menimbulkan konflik dependensi.
+- **Konflik Dependensi**: 
+    Proyek Django yang berbeda mungkin memerlukan versi yang berbeda dari paket Python atau library tertentu sehingga proyek-proyek tersebut dapat saling mempengaruhi dan menimbulkan konflik dependensi.
 
-- **Kesulitan Manajemen Dependensi**: Manajemen dependensi proyek akan menjadi lebih sulit karena kita harus memantau dan mengelola semua dependensi global di tingkat sistem.
+- **Kesulitan Manajemen Dependensi**: 
+    Manajemen dependensi proyek akan menjadi lebih sulit karena kita harus memantau dan mengelola semua dependensi global di tingkat sistem.
 
-- **Kurangnya Reproducibility**: Tanpa virtual environment, akan sulit untuk memastikan bahwa proyek dapat dijalankan dengan benar di lingkungan pengembangan yang berbeda, yang dapat menghasilkan masalah ketika kita ingin berbagi proyek atau mengerjakannya di mesin lain.
+- **Kurangnya Reproducibility**: 
+    Sulit memastikan bahwa proyek dapat dijalankan dengan benar di environment pengembangan yang berbeda sehingga menimbulkan kemungkinan masalah ketika kita ingin berbagi proyek atau mengerjakannya di tempat lain.
 
 
 # Penjelasan terkait MVC, MVT, MVVM serta perbedaan dari ketiganya
-MVC, MVT, dan MVVM adalah tiga arsitektur desain yang digunakan dalam pengembangan perangkat lunak, terutama dalam pengembangan aplikasi web. Mereka memiliki konsep yang mirip dalam pemisahan tanggung jawab dalam pengembangan perangkat lunak, tetapi memiliki perbedaan dalam implementasi dan fokus.
+MVC, MVT, dan MVVM adalah tiga arsitektur desain yang digunakan dalam pengembangan perangkat lunak, terutama dalam pengembangan aplikasi web. 
 
-**MVC (Model-View-Controller):**
+## MVC (Model-View-Controller):
+1. **Model** -> mengelola data dan berisi logika untuk pemrosesan data.
 
-1. **Model**: Mewakili data dan logika bisnis aplikasi. Ini mengelola data dan berisi logika yang berhubungan dengan pemrosesan data.
+2. **View** -> tampilan dan presentasi data kepada pengguna untuk menampilkan informasi.
 
-2. **View**: Bertanggung jawab untuk tampilan dan presentasi data kepada pengguna. Ini adalah antarmuka pengguna yang digunakan untuk menampilkan informasi.
+3. **Controller** -> mengontrol alur aplikasi dan mengatur interaksi antara Model dan View.
 
-3. **Controller**: Mengontrol alur aplikasi dan mengatur interaksi antara Model dan View. Ini menerima input dari pengguna dan mengirimkannya ke Model atau View yang sesuai.
+## MVT (Model-View-Template):
 
-**MVT (Model-View-Template):**
+1. **Model** -> mengelola data dan berisi logika untuk pemrosesan data.
 
-1. **Model**: Sama dengan MVC, mewakili data dan logika bisnis. Ini mengelola data dan berisi logika yang berhubungan dengan pemrosesan data.
+2. **View** -> tampilan dan presentasi data kepada pengguna untuk menampilkan informasi.
 
-2. **View**: Sama dengan MVC, bertanggung jawab untuk tampilan dan presentasi data. Ini adalah antarmuka pengguna yang digunakan untuk menampilkan informasi.
+3. **Template** -> mengontrol tampilan secara langsung dan memungkinkan pengembang untuk memisahkan logika presentasi dari tampilan.
 
-3. **Template**: Ini adalah bagian yang berbeda dari MVC. Template mengontrol tampilan secara langsung dan memungkinkan pengembang untuk memisahkan logika presentasi dari tampilan.
+## MVVM (Model-View-ViewModel):
 
-**MVVM (Model-View-ViewModel):**
+1. **Model** -> mengelola data dan berisi logika untuk pemrosesan data.
 
-1. **Model**: Sama dengan MVC dan MVT, mewakili data dan logika bisnis. Ini mengelola data dan berisi logika yang berhubungan dengan pemrosesan data.
+2. **View** -> tampilan dan presentasi data kepada pengguna untuk menampilkan informasi.
 
-2. **View**: Sama dengan MVC dan MVT, bertanggung jawab untuk tampilan. Ini adalah antarmuka pengguna yang digunakan untuk menampilkan informasi.
+3. **ViewModel** -> mengubah data Model ke format yang dapat ditampilkan oleh View.
 
-3. **ViewModel**: Ini adalah lapisan yang memediasi antara Model dan View. ViewModel mengubah data Model ke format yang dapat ditampilkan oleh View. Ini memungkinkan pemisahan yang kuat antara tampilan dan data, serupa dengan Template dalam MVT.
+Terdapat beberapa perdebaan dari MVC, MVT, dan MVVM. MVC lebih mengarah ke pemisahan peran antara Model, View, dan Controller, tetapi sering kali tugas Controller menjadi kompleks dalam aplikasi yang besar. MVT menggunakan Template untuk mengelola tampilan, yang memungkinkan pemisahan logika presentasi dari tampilan. Terakhir, MVVM lebih mengarah ke pemisahan data dan tampilan dimana ViewModel bertanggung jawab untuk memformat data dari Model agar sesuai dengan tampilan View, sehingga tampilan tidak perlu memiliki logika pemformatan data. Mereka memiliki konsep yang mirip dalam pemisahan tanggung jawab dalam pengembangan perangkat lunak, tetapi memiliki perbedaan dalam implementasi dan penekanannya pada pemisahan tugas.
 
-Perbedaan utama antara ketiganya adalah dalam implementasi dan penekanannya pada pemisahan tugas. 
-
-- **MVC** lebih tentang pemisahan peran antara Model, View, dan Controller, tetapi sering kali tugas Controller menjadi kompleks dalam aplikasi yang besar.
-
-- **MVT** mirip dengan MVC, tetapi menggunakan Template untuk mengelola tampilan, yang memungkinkan pemisahan logika presentasi dari tampilan.
-
-- **MVVM** lebih mengenai pemisahan data dan tampilan. ViewModel bertanggung jawab untuk memformat data dari Model agar sesuai dengan tampilan View, sehingga tampilan tidak perlu memiliki logika pemformatan data.
-
-Django, sebagai framework Python untuk pengembangan web, biasanya lebih sesuai dengan arsitektur MVT.

@@ -1,6 +1,11 @@
 # Pretty Little Things 
 ### by Georgina Elena Shinta Dewi Achti - 2206810995
+berikut merupakan hasil pengerjaan Tugas Pemrograman Berbasis Platform.
 
+<details>
+<summary>Tugas 2: Implementasi Model-View-Template (MVT) pada Django</summary>
+
+## TUGAS 2✨
 Projek ini dibuat dengan tujuan memenuhi Tugas 2 Pemrograman Berbasis Platform. Link app dapat di akses [di sini](https://prettylittlethings-co.adaptable.app).
 
 Saya akan menjelaskan beberapa poin-poin berikut:
@@ -249,4 +254,4 @@ MVC, MVT, dan MVVM adalah tiga arsitektur desain yang digunakan dalam pengembang
 3. **ViewModel** -> mengubah data Model ke format yang dapat ditampilkan oleh View.
 
 Terdapat beberapa perdebaan dari MVC, MVT, dan MVVM. MVC lebih mengarah ke pemisahan peran antara Model, View, dan Controller, tetapi sering kali tugas Controller menjadi kompleks dalam aplikasi yang besar. MVT menggunakan Template untuk mengelola tampilan, yang memungkinkan pemisahan logika presentasi dari tampilan. Terakhir, MVVM lebih mengarah ke pemisahan data dan tampilan dimana ViewModel bertanggung jawab untuk memformat data dari Model agar sesuai dengan tampilan View, sehingga tampilan tidak perlu memiliki logika pemformatan data. Mereka memiliki konsep yang mirip dalam pemisahan tanggung jawab dalam pengembangan perangkat lunak, tetapi memiliki perbedaan dalam implementasi dan penekanannya pada pemisahan tugas.
-
+</details>

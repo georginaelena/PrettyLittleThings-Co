@@ -288,15 +288,18 @@ Saya akan menjelaskan beberapa poin-poin berikut:
 
 
 ## `JSON` sering digunakan dalam Pertukaran Data antara App Web Modern?!
-Seperti yang telah dibahas sebelumnnya, `JSON` (JavaScript Object Notation) merupakan format Bahasa-Independen yang berasal dari JavaScrip yang dapat dibaca dan ditulis oleh manusia. Terdapat beberapa kegunaan dari `JSON`, yaitu:
-- **Transfer data dengan mudah**.
-Menyimpan semua data dalam array sehingga transfer data menjadi lebih mudah. Itu sebabnya `JSON` adalah yang terbaik untuk berbagi data dengan ukuran berapa pun, termasuk audio, video, dan lain-lain.
-- **Ringan dan Mudah dibaca.** Sintaksnya sangat kecil, mudah, dan ringan itulah alasannya mengeksekusi dan merespons dengan cara yang lebih cepat.
-- **Dukungan Bahasa Pemrograman.** `JSON` didukung oleh hampir semua bahasa pemrograman, sehingga memungkinkan interoperabilitas yang baik antara berbagai teknologi dan aplikasi. `JSON` memiliki jangkauan luas untuk dukungan browser kompatibilitas dengan sistem operasi. Tidak memerlukan banyak usaha untuk membuat semuanya kompatibel dengan browser.
-- **Dukungan untuk Nested Data.** `JSON` mendukung data berjenjang (nested), yang memungkinkan representasi data yang kompleks dan terstruktur dengan mudah. Ini berguna dalam situasi di mana data memiliki hubungan hierarkis. Parsing di sisi server adalah bagian terpenting yang diinginkan pengembang. Jika penguraian akan cepat di sisi server maka pengguna bisa mendapatkan respons yang cepat, jadi dalam hal ini, penguraian sisi server `JSON` adalah kelebihannya dibandingkan yang lain.
-
+Seperti yang telah dibahas sebelumnnya, `JSON` (JavaScript Object Notation) merupakan format Bahasa-Independen yang berasal dari JavaScript yang dapat dibaca dan ditulis oleh manusia. Terdapat beberapa kegunaan dari `JSON`, yaitu:
+- **Transfer data dengan mudah.**
+Menyimpan semua data dalam array sehingga transfer data menjadi lebih mudah. Itu sebabnya `JSON` sangat baik untuk berbagi data dengan ukuran berapa pun, termasuk audio, video, dan lain-lain.
+- **Ringan dan Mudah dibaca.** 
+Sintaksnya sangat kecil, mudah, dan ringan sehingga menjadi alasan mengeksekusi dan merespons dengan cara yang lebih cepat.
+- **Dukungan Bahasa Pemrograman.** 
+`JSON` didukung oleh hampir semua bahasa pemrograman, sehingga memungkinkan interoperabilitas yang baik antara berbagai teknologi dan aplikasi. `JSON` memiliki jangkauan luas untuk dukungan browser kompatibilitas dengan sistem operasi sehingga tidak memerlukan banyak usaha untuk membuat semuanya kompatibel dengan browser.
+- **Dukungan untuk Nested Data.** 
+`JSON` mendukung data berjenjang (nested) yang memungkinkan representasi data yang kompleks dan terstruktur dengan mudah. Hal ini berguna dalam situasi di mana data memiliki hubungan hierarkis. 
 
 # Implementasi Data
+_notes: terdapat perubahan nama variabel/objek dari Tugas 2, yaitu `Item` menjadi `Product` di Tugas 3._
 <details>
 <summary>Membuat Input Form</summary>
 
@@ -418,7 +421,7 @@ Berikutnya, saya membuat file `create_product.html` pada direktori `main` yang b
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Add Product"/>
+                <input type="submit" value="Add Product"/> # tombol
             </td>
         </tr>
     </table>
@@ -426,7 +429,7 @@ Berikutnya, saya membuat file `create_product.html` pada direktori `main` yang b
 
 {% endblock %}
 ```
-yang akan menampilkan halaman form untuk menambah item baru. File ini mencakup form dengan token CSRF, bidang-bidang form, dan tombol "Add Item" yang mengirimkan data form ke view create_product.
+yang akan menampilkan halaman form untuk menambah item baru. File ini mencakup form dengan token CSRF, bidang-bidang form, dan tombol "Add Product" yang mengirimkan data form ke view create_product.
 
 Kemudian pada `main.html` di direktori `main`, saya menambahkan kode:
 
@@ -462,7 +465,7 @@ Kemudian pada `main.html` di direktori `main`, saya menambahkan kode:
 
 {% endblock content %}
 ```
-untuk menampilkan data produk yang diterima dari view `show_main` dalam bentuk tabel, serta tombol yang akan mengarahkan user pada halaman form penambahan item.
+untuk menampilkan data produk yang diterima dari view `show_main` dalam bentuk tabel, serta tombol yang akan mengarahkan user pada halaman form penambahan product.
 
 
 </details>
@@ -489,8 +492,7 @@ def show_main(request):
 
     return render(request, "main.html", context)
 ```
-`products = Product.objects.all()` mengambil semua objek Product dari database dengan Product.objects.all() dan menyimpannya dalam variabel product. Data item kemudian disertakan dalam konteks dan akan ditampilkan dalam template HTML main.html.
-
+`products = Product.objects.all()` mengambil semua objek Product dari database dengan Product.objects.all() dan menyimpannya dalam variabel product. Data item kemudian disertakan dalam konteks dan akan ditampilkan dalam template HTML `main.html`.
 
 
 Format `XML`:
@@ -527,7 +529,8 @@ def show_json_by_id(request, id):
 </details>
 <details>
 <summary>Membuat Routing URL</summary>
-Tambahkan kelima path url fungsi diatas ke dalam urlpatterns pada urls.py di folder main. Tidak lupa untuk meng-import-nya dari views.py.
+
+Tambahkan kelima path **url** fungsi diatas ke dalam **urlpatterns** pada `urls.py` di folder `main`. Tidak lupa untuk meng-import-nya dari `views.py`.
 
 ``` 
 from django.urls import path

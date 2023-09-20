@@ -5,16 +5,16 @@ berikut merupakan hasil pengerjaan Tugas Pemrograman Berbasis Platform.
 <details>
 <summary>Tugas 2: Implementasi Model-View-Template (MVT) pada Django</summary>
 
-## TUGAS 2✨
+# TUGAS 2📕
 Projek ini dibuat dengan tujuan memenuhi Tugas 2 Pemrograman Berbasis Platform. Link app dapat di akses [di sini](https://prettylittlethings-co.adaptable.app).
 
 Saya akan menjelaskan beberapa poin-poin berikut:
-1. Implementasi dalam proses pembuatan proyek Django: PrettyLittleThings-Co
+1. Implementasi dalam proses pembuatan proyek Django: **PrettyLittleThings-Co**
 2. Bagan request client ke web aplikasi berbasis Django beserta responnya
 3. Alasan penggunaan Virtual Environment
 4. Penjelasan terkait MVC, MVT, MVVM serta perbedaan dari ketiganya
 
-# Implementasi dalam proses pembuatan proyek Django: PrettyLittleThings-Co
+## Implementasi dalam proses pembuatan proyek Django: PrettyLittleThings-Co
 <details>
 <summary>Pembuatan Projek Django</summary> 
 Membuat suatu repository baru di GitHub dengan nama "PrettyLittleThings-Co" lalu diclone di local. Kemudian saya membuat file `requirements.txt` pada folder direktori local saya dan menuliskan requirements yang diperlukan dari tutorial, yaitu:
@@ -198,12 +198,12 @@ Tunggu aplikasi hingga proses deploy selesai.
 </details>
 
 
-# Bagan request client ke web aplikasi berbasis Django beserta responnya
+## Bagan request client ke web aplikasi berbasis Django beserta responnya
 ![](https://i.imgur.com/ltmg32e.png)
 Terdapat komponen `client`, `urls.py`, `views.py`, `models.py`, serta berkas html `main.html` yang menjadi bagian dari berjalannya sistem. Sistem dimulai dengan **request** yang dikirimkan oleh `client` ke `urls.py` untuk mengolah file request yang kemudian dilanjutkan ke `views.py`. Pada `views.py` memproses data, mengambil data dari database, kemudian lanjut ke `models.py` dan merender berkas `main.html`. Setelah template data berhasil dirender, halaman akan dikembalikan sebagai HTTP Response kepada client.
 
 
-# Alasan penggunaan Virtual Environment
+## Alasan penggunaan Virtual Environment
 Pada Django, virtual environment memiliki banyak manfaat yang digunakan dalam pengembangan Python bagi para pengguna. Manfaat berupa:
 
 - **Isolasi Dependensi.**
@@ -227,17 +227,17 @@ Tanpa virtual environment, kita tetap dapat membuat aplikasi web berbasis Django
     Sulit memastikan bahwa proyek dapat dijalankan dengan benar di environment pengembangan yang berbeda sehingga menimbulkan kemungkinan masalah ketika kita ingin berbagi proyek atau mengerjakannya di tempat lain.
 
 
-# Penjelasan terkait MVC, MVT, MVVM serta perbedaan dari ketiganya
+## Penjelasan terkait MVC, MVT, MVVM serta perbedaan dari ketiganya
 MVC, MVT, dan MVVM adalah tiga arsitektur desain yang digunakan dalam pengembangan perangkat lunak, terutama dalam pengembangan aplikasi web. 
 
-## MVC (Model-View-Controller):
+### MVC (Model-View-Controller):
 1. **Model** -> mengelola data dan berisi logika untuk pemrosesan data.
 
 2. **View** -> tampilan dan presentasi data kepada pengguna untuk menampilkan informasi.
 
 3. **Controller** -> mengontrol alur aplikasi dan mengatur interaksi antara Model dan View.
 
-## MVT (Model-View-Template):
+### MVT (Model-View-Template):
 
 1. **Model** -> mengelola data dan berisi logika untuk pemrosesan data.
 
@@ -254,4 +254,318 @@ MVC, MVT, dan MVVM adalah tiga arsitektur desain yang digunakan dalam pengembang
 3. **ViewModel** -> mengubah data Model ke format yang dapat ditampilkan oleh View.
 
 Terdapat beberapa perdebaan dari MVC, MVT, dan MVVM. MVC lebih mengarah ke pemisahan peran antara Model, View, dan Controller, tetapi sering kali tugas Controller menjadi kompleks dalam aplikasi yang besar. MVT menggunakan Template untuk mengelola tampilan, yang memungkinkan pemisahan logika presentasi dari tampilan. Terakhir, MVVM lebih mengarah ke pemisahan data dan tampilan dimana ViewModel bertanggung jawab untuk memformat data dari Model agar sesuai dengan tampilan View, sehingga tampilan tidak perlu memiliki logika pemformatan data. Mereka memiliki konsep yang mirip dalam pemisahan tanggung jawab dalam pengembangan perangkat lunak, tetapi memiliki perbedaan dalam implementasi dan penekanannya pada pemisahan tugas.
+</details>
+
+<details>
+<summary>Tugas 3: Implementasi Form dan Data Delivery pada Django</summary>
+
+# TUGAS 3📗
+Projek ini dibuat dengan tujuan memenuhi Tugas 3 Pemrograman Berbasis Platform.
+
+Saya akan menjelaskan beberapa poin-poin berikut:
+1. Perbedaan antara form POST dan form GET dalam Django
+2. Perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+3. Alasan mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern
+4. Penjelasan cara saya mengimplementasikan lanjutan proses pembuatan proyek **PrettyLittleThings-Co**
+
+## form `POST` vs form `GET` in Django
+
+`Form` adalah elemen HTML yang digunakan untuk mengumpulkan data dari pengguna, seperti input teks, tombol radio, atau checkbox yang memungkinkan pengguna untuk mengirim data ke _web server_ untuk diproses.
+
+| Perbedaan | Post | Get |
+| ------- | ------- | ------- |
+| Pengiriman Data | Mengirim data sebagai bagian dari permintaan HTTP dan bersifat tersembunyi  | Mengirim data melalui query string dalam URL |
+| Keamanan | Lebih aman karena data tidak terlihat di URL | data ditampilkan secara terbuka dalam URL |
+| Penggunaan | Membuat, memperbarui, atau menghapus data sehingga cocok untuk mengirim data sensitif | Melakukan pencarian atau menampilkan data sehingga cocok untuk permintaan yang hanya mengambil data dari server tanpa mengubahnya|
+| Kapasitas Data | Dapat mengirim jumlah data yang lebih besar karena data disimpan di tubuh permintaan | Dibatasi oleh panjang URL sehingga kurang cocok untuk data yang besar |
+
+## `XML` vs `JSON` vs `HTML` dalam Pengiriman Data
+| Perbedaan | XML | JSON | HTML |
+| --------- | --- | ---- | ---- |
+| Singkatan | eXtensible Markup Language | JavaScript Object Notation | HyperText Markup Language |
+| Tujuan |  dirancang terutama untuk menyimpan, mengirimkan, dan mengatur data | merepresentasikan data dengan format sederhana yang mudah dibaca mesin dan manusia dengan menyajikan pasangan key-value di dalam suatu array | mendefinisikan tata letak, konten, serta visual halaman web yang mencakup elemen seperti judul, paragraf, daftar, tautan, dan komponen multimedia |
+| Penggunaan | Digunakan dalam pertukaran data antara sistem yang berbeda dan perlu menggambarkan data yang kompleks dan terstruktur dengan baik | Digunakan dalam pengembangan aplikasi web karena mudah dibaca oleh manusia dan mudah digunakan oleh bahasa pemrograman modern | Digunakan untuk menampilkan konten web sehingga dapat diakses oleh browser web |
+
+
+## `JSON` sering digunakan dalam Pertukaran Data antara App Web Modern?!
+Seperti yang telah dibahas sebelumnnya, `JSON` (JavaScript Object Notation) merupakan format Bahasa-Independen yang berasal dari JavaScrip yang dapat dibaca dan ditulis oleh manusia. Terdapat beberapa kegunaan dari `JSON`, yaitu:
+- **Transfer data dengan mudah**.
+Menyimpan semua data dalam array sehingga transfer data menjadi lebih mudah. Itu sebabnya `JSON` adalah yang terbaik untuk berbagi data dengan ukuran berapa pun, termasuk audio, video, dan lain-lain.
+- **Ringan dan Mudah dibaca.** Sintaksnya sangat kecil, mudah, dan ringan itulah alasannya mengeksekusi dan merespons dengan cara yang lebih cepat.
+- **Dukungan Bahasa Pemrograman.** `JSON` didukung oleh hampir semua bahasa pemrograman, sehingga memungkinkan interoperabilitas yang baik antara berbagai teknologi dan aplikasi. `JSON` memiliki jangkauan luas untuk dukungan browser kompatibilitas dengan sistem operasi. Tidak memerlukan banyak usaha untuk membuat semuanya kompatibel dengan browser.
+- **Dukungan untuk Nested Data.** `JSON` mendukung data berjenjang (nested), yang memungkinkan representasi data yang kompleks dan terstruktur dengan mudah. Ini berguna dalam situasi di mana data memiliki hubungan hierarkis. Parsing di sisi server adalah bagian terpenting yang diinginkan pengembang. Jika penguraian akan cepat di sisi server maka pengguna bisa mendapatkan respons yang cepat, jadi dalam hal ini, penguraian sisi server `JSON` adalah kelebihannya dibandingkan yang lain.
+
+
+# Implementasi Data
+<details>
+<summary>Membuat Input Form</summary>
+
+Kita perlu membuat form untuk mendapatkan data baru yang ingin ditampilkan. Sebelum itu, saya membuat direktori baru pada **root** dengan nama `templates` yang di dalamnya terdapat file `base.html` yang berisi:
+
+```
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
+```
+Saya melakukan konfigurasi pada `settings.py` di direktori `inventory_co` agar `base.html` terdeteksi sebagai template dengan menambahkan:
+
+```
+...
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'], # kode ini
+        'APP_DIRS': True,
+        ...
+    }
+]
+...
+```
+
+Kemudian, saya mengubah `main.html` pada direktori `main/templates` terlebih dahulu agar dapat menggunakan `base.html` sebagai template dasarnya dengan kode:
+
+```
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{judul}}</h1>
+
+    <h5>Seller name: </h5>
+    <p>{{ name }}<p>
+
+    <h5>The Items: </h5>
+    <p>{{ item }}<p>
+
+    <h5>Price: </h5>
+    <p>{{ price }}<p>
+
+    <h5>Address: </h5>
+    <p>{{ adress }}<p>
+
+{% endblock content %}
+```
+
+Selanjutnya, saya sudah dapat fokus untuk membuat input form. Saya membuat berkas `forms.py` pada direktori `main` kemudian mengisi file dengan:
+
+```
+from django.forms import ModelForm
+from main.models import Product
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "price", "description"]
+
+```
+
+Selanjutnya, saya mengubah fungsi `show_main` dan menambahkan fungsi `create_product` pada file `views.py` dalam direktori `main` dengan kode berikut:
+
+```
+def show_main(request):
+    products = Product.objects.all()
+
+    context = {
+        'judul': 'Hi! It is Pretty Little Things Here~',
+        'name': 'Elena',
+        'item': 'DIY Bracellet',
+        'amount': '10',
+        'price': ' Rp10.000,-',
+        'adress': 'Jl. Yu',
+        'products': products
+    }
+
+    return render(request, "main.html", context)
+
+def create_product(request):
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+
+```
+Fungsi `create_product` menangani input baru dari form yang akan membuat sebuah objek **ProductForm** berdasarkan data yang diterima dari `request.POST` (data yang dikirimkan melalui form). Lalu, diperiksa kembali apakah form tersebut valid dengan menggunakan `form.is_valid()` dan apabila valid dan metode request adalah POST, data produk baru akan disimpan ke database melalui `form.save()`, kemudian pengguna akan diarahkan kembali ke halaman utama dengan **HttpResponseRedirect**.
+
+Berikutnya, saya membuat file `create_product.html` pada direktori `main` yang berisi:
+```
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Add New Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+yang akan menampilkan halaman form untuk menambah item baru. File ini mencakup form dengan token CSRF, bidang-bidang form, dan tombol "Add Item" yang mengirimkan data form ke view create_product.
+
+Kemudian pada `main.html` di direktori `main`, saya menambahkan kode:
+
+```
+...
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Date Added</th>
+    </tr>
+
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+    {% for product in products %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.date_added}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<a href="{% url 'main:create_product' %}"> # tombol
+    <button>
+        Add New Product
+    </button>
+</a>
+
+{% endblock content %}
+```
+untuk menampilkan data produk yang diterima dari view `show_main` dalam bentuk tabel, serta tombol yang akan mengarahkan user pada halaman form penambahan item.
+
+
+</details>
+
+<details>
+<summary>Menambahkan Fungsi pada Views</summary>
+
+Saya menambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format `HTML`, `XML`, `JSON`, `XML` by **ID**, dan `JSON` by **ID**. Untuk format `XML` dan `JSON`, saya akan menambahkan import **HttpResponse** dan **serializers** pada `views.py`di folder `main`.
+
+Format `HTML`:
+```
+def show_main(request):
+    products = Product.objects.all()
+
+    context = {
+        'judul': 'Hi! It is Pretty Little Things Here~',
+        'name': 'Elena',
+        'item': 'DIY Bracellet',
+        'amount': '10',
+        'price': ' Rp10.000,-',
+        'adress': 'Jl. Yu',
+        'products': products
+    }
+
+    return render(request, "main.html", context)
+```
+`products = Product.objects.all()` mengambil semua objek Product dari database dengan Product.objects.all() dan menyimpannya dalam variabel product. Data item kemudian disertakan dalam konteks dan akan ditampilkan dalam template HTML main.html.
+
+
+
+Format `XML`:
+
+```
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+```
+
+Format `JSON`:
+
+``` 
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+
+
+Format `XML` by **ID**:
+
+```
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+```
+
+Format `JSON` by **ID**:
+``` 
+def show_json_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+</details>
+<details>
+<summary>Membuat Routing URL</summary>
+Tambahkan kelima path url fungsi diatas ke dalam urlpatterns pada urls.py di folder main. Tidak lupa untuk meng-import-nya dari views.py.
+
+``` 
+from django.urls import path
+from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id 
+
+app_name = 'main'
+
+urlpatterns = [
+    path('', show_main, name='show_main'),
+    path('create-product', create_product, name='create_product'),
+    path('xml/', show_xml, name='show_xml'), 
+    path('json/', show_json, name='show_json'), 
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
+]
+```
+
+Dengan begitu, input form sudah selesai dibuat dan siap digunakan. Jalankan command `python manage.py runserver` dan kunjungi http://localhost:8000.
+</details>
+
+<details>
+<summary>Postman Screenshot</summary>
+
+1. Screenshot `HTML`
+![](https://i.imgur.com/BSpmURi.png)
+![](https://i.imgur.com/XN5WnWL.png)
+
+2. Screenshot `XML`
+![](https://i.imgur.com/utbizIL.png)
+
+3. Screenshot `XML` by **ID**
+![](https://i.imgur.com/6qx8lbV.png)
+
+4. Screenshot `JSON`
+![](https://i.imgur.com/9LOAx1D.png)
+
+5. Screenshot `JSON` by **ID**
+![](https://i.imgur.com/h7u3xHo.png)
+
+</details>
 </details>

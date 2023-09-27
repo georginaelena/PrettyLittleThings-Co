@@ -627,8 +627,8 @@ Beberapa risiko potensial yang terkait dengan penggunaan cookies, berupa:
 ## Implementasi Data💻
 <details>
 <summary>Implementasi fungsi Registrasi, Log in, dan Log out</summary>
-Untuk mengimplementasikan fungsi registrasi, login, dan logout, saya menambahkan beberapa fitur django ke views.py yaitu:
 
+Untuk mengimplementasikan fungsi registrasi, login, dan logout, pada subdirektori `main` di `views.py` saya menambahkan:
 ```
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm

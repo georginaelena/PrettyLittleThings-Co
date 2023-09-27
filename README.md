@@ -576,5 +576,75 @@ Dengan begitu, input form sudah selesai dibuat dan siap digunakan. Jalankan comm
 <details>
 <summary> Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django </summary>
 
+# Tugas 4📙
+Projek ini dibuat dengan tujuan memenuhi Tugas 3 Pemrograman Berbasis Platform.
+
+Saya akan menjelaskan beberapa poin-poin berikut:
+
+- Apa itu Django UserCreationForm, serta apa kelebihan dan kekurangannya
+- Perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan alasan mengapa keduanya penting
+- Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna
+- Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+- Cara saya mengimplementasikan checklist di atas secara step-by-step.
+
+## Django `UserCreationForm`🧐
+ Django `UserCreationForm` adalah sebuah form Django yang digunakan untuk membuat user baru di dalam suatu web app. `UserCreationForm` umumnya memiliki 3 field, yaitu `username`, `password1`, dan `password2`. Field `password2` biasanya digunakan untuk mengonfirmasi password sebelumya.
+
+| Kelebihan | Kekurangan |
+| --------- | ---------- |
+| mudah digunakan karena merupakan default form dari Django sehingga tidak perlu membuat model form lagi dan data pendaftar dapat langsung disimpan di database. | tidak customizable secara ekstensif karena memiliki tingkat kustomisasi yang terbatas sehingga membutuhkan model form dengan field tambahan atau logika validasi yang lebih kompleks sehingga untuk penambahan field lain dan perubahan tampilan harus dilakukan perubahan sendiri. |
+| validasi otomatis yang mana data yang dimasukkan oleh pengguna, yaitu keunikan nama pengguna, kata sandi yang cukup kuat, dll akan melakukan validasi secara otomatis. | |
+| secara langsung berintegrasi dengan Django's _authentication system_ yang membuat mudah untuk menambahkan sistem autentikasi ke dalam aplikasi Django. | |
+
+## Autentikasi 🆚 Otorisasi dalam Konteks Django
+**PERBEDAAN👐🏻**
+- Autentikasi adalah proses verifikasi siapa user yang berusaha menggunakan akses yang melibatkan verifikasi nama pengguna (username) dan kata sandi (password) yang dimasukkan oleh pengguna sesuai dengan yang ada dalam database. 
+- Otorisasi adalah proses verifikasi user yang telah diautentikasi apakah dapat mengakses suatu sistem sehingga proses ini memutuskan apa yang diperbolehkan atau tidak diperbolehkan untuk pengguna yang sudah terautentikasi. 
+
+**Mengapa Keduanya Penting?**
+
+Autentikasi penting untuk memastikan bahwa pengguna yang masuk adalah pengguna yang sah, sedangkan otorisasi penting untuk mengontrol hak akses pengguna dalam aplikasi. Dengan kombinasi autentikasi dan otorisasi, kita dapat memastikan bahwa pengguna hanya dapat mengakses bagian dari aplikasi yang sesuai dengan izin mereka untuk menjaga keamanan serta privasi data.
+
+## Cookies dalam Konteks Aplikasi Web Django🍪✨
+**Apa itu Cookies🤔💭?**
+
+Cookies adalah penyimpanan data client yang disimpan oleh server web dan dikirim kembali ke server setiap kali permintaan dilakukan. Jadi, penyimpanan bersifat **sementara** karena data hanya tersimpan ketika pengguna sedang melakukan interaksi di dalam aplikasi web. Cookies mengandung informasi tertentu, seperti pengenal sesi atau preferensi pengguna, dan disimpan dalam penyimpanan lokal browser. 
+
+**Cara Django Menggunakan Cookies untuk Mengelola Data Sesi Pengguna**
+
+Cookies dikelola dengan struktur seperti **map** yang terdiri dari **key** dan **value** berupa user dan data yang disimpan. Untuk menjaga keamanan data, pada Django juga terdapat expiration date sehingga ketika pengguna sudah keluar dari aplikasi web, seluruh data pengguna juga akan dinonaktifkan. Umumnya, cookies digunakan untuk menyimpan informasi sementara seperti ID sesi, preferensi pengguna, atau informasi lain yang diperlukan untuk interaksi selama sesi pengguna.
+
+## Keamanan Penggunaan Cookies dalam Pengembangan Web
+Cookies disimpan pada browser client sehingga keamanan sebenarnya tergantung pada browser milik client. Selain itu, cookies juga dapat dilihat secara langsung oleh pengguna sehingga data yang disimpan tidak aman jika digunakan untuk menyimpan sesuatu yang sifatnya **private**.
+
+Beberapa resiko potensial yang harus diwaspadai terhadap keamanan cookies adalah adanya Cookie Theft yaitu pencurian cookies karena mendapat akses ilegal ke cookies pengguna. Umumnya menyerang informasi pengguna yang bersifat private seperti ID, validation token, dan lain-lain sehingga sesi pengguna dapat diambil alih.
+
+Beberapa risiko potensial yang terkait dengan penggunaan cookies, berupa:
+- **Cross-Site Scripting (XSS)**. Terjadi ketika data yang disimpan dalam cookies tidak dihindari atau disaring dengan benar. Penyerang dapat memasukkan kode skrip berbahaya ke dalam cookies yang akan dieksekusi oleh browser pengguna saat cookies tersebut digunakan.
+- **Session Hijacking**. Terjadi ketika cookies digunakan untuk mengelola sesi pengguna dan tidak dienkripsi dengan baik, ada risiko sesi pengguna yang dapat dicuri oleh penyerang dan penyerang masuk ke akun pengguna tanpa izin.
+- **Man-in-the-Middle (MitM) Attacks**. Terjadi ketika koneksi antara pengguna dan server tidak aman (contoh, tanpa HTTPS) sehingga cookies dapat disadap oleh penyerang saat transit. 
+
+## Implementasi Data💻
+<details>
+<summary>Implementasi fungsi Registrasi, Log in, dan Log out</summary>
+
+
+</details>
+<details>
+<summary>Membuat dua akun pengguna dengan masing-masing tiga dummy data </summary>
+
+
+</details>
+<details>
+<summary>Menghubungkan model Item dengan User</summary>
+
+
+</details>
+<details>
+<summary>Menampilkan detail informasi pengguna yang sedang Logged in seperti Username dan menerapkan Cookies seperti Last Login di halaman utama aplikasi</summary>
+
+
+</details>
+
 
 </details>

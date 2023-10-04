@@ -1022,9 +1022,10 @@ pada subdirektori `templates/base.html`, saya menambahkan tag `<meta name="viewp
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 ```
+</details>
 
 <details>
-<summary>Membuat kostumisasi pada Aplikasi</summary>
+<summary>Membuat Kostumisasi pada Aplikasi</summary>
 
 pertama saya, membuat style pada subdirektori `templates/base.html` dengan kode:
 ```
@@ -1124,6 +1125,5 @@ Setelah itu, pada setiap button yang ada saya buat kostumisasi sebagai berikut:
 ```
 
 Terakhir untuk kostumisasi background, saya menggunakan warna pink `#ffe1f4`.
-</details>
 
 </details>

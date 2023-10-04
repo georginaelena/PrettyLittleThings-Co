@@ -1006,6 +1006,124 @@ Dalam desain web, pemahaman yang baik tentang perbedaan antara margin dan paddin
 
 ## Implementasi Data💻
 
+Berikut merupakan implementasi pengerjaan Tugas 5:
 
+<details>
+<summary>Menambahkan Bootstrap ke Aplikasi</summary>
+
+pada subdirektori `templates/base.html`, saya menambahkan tag `<meta name="viewport">`. Kemudian saya menambahkan:
+
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+```
+
+<details>
+<summary>Membuat kostumisasi pada Aplikasi</summary>
+
+pertama saya, membuat style pada subdirektori `templates/base.html` dengan kode:
+```
+...
+<style>
+            /* CSS untuk mengatur format tengah */
+            body {
+                background-color: #ffe1f4;
+            }
+
+            #login {
+            display: flex;
+            justify-content: center; /* Memposisikan elemen secara horizontal di tengah layar */
+            align-items: center; /* Memposisikan elemen secara vertikal di tengah layar */
+            padding-top: 50px;
+            padding-bottom: 50px;
+            background-color: #ffe1f4; /* Warna latar belakang */
+            }
+        
+        
+            .login {
+                padding: 80px;
+                max-width: 500px;
+                background-color: #ffffff; /* Warna latar belakang elemen .login */
+                border-radius: 10px; /* Border radius untuk sudut elemen */
+                box-shadow: 0px 0px 10px rgba(255, 223, 248, 0.1); /* Efek bayangan */
+            }
+
+            .login form {
+                margin-top: 10px;
+            }
+        
+            .login table {
+                margin-top: 10px; 
+            }
+        
+            .login ul {
+                margin-top: 20px;
+            }
+
+        </style>
+...
+```
+
+style di atas merupakan format style untuk halaman `login`, `register`, dan `add_prodct`. Kemudian, pada masing-masing file yang ada di subdirektori `main/templates` saya berikan navbar dengan contoh implementasi berikut:
+```
+...
+<!-- navbar untuk Login-->
+<nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="display: flex; align-items: center;">  <!-- agar posisi logo dan judul sejajar--> 
+                    <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;"> <!-- agar ukuran logo menyesuaikan dengan judul-->
+                    <span class="fw-bold fs-1">Login</span> <!-- ukuran judul -->
+                </a>
+            </div>
+        </nav>
+...
+```
+
+Lalu, saya membuat kostumisasi tabel produk dengan kode:
+
+```
+...
+<div class="container">
+        <table class="table"> <!-- Tambahkan style margin: 0 auto; untuk membuat tabel berada di tengah -->
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Actions</th> <!-- Kolom untuk tombol Edit dan Delete -->
+                </tr>
+            </thead>
+            <tbody>
+                {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+                {% for product in products %}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.date_added}}</td>
+                    <td> 
+                        <div class="d-flex justify-content-between">
+...
+```
+
+Setelah itu, pada setiap button yang ada saya buat kostumisasi sebagai berikut:
+```
+<form>
+    <!-- Kustomisasi button Edit-->
+    <a href="{% url 'main:edit_product' product.pk %}">
+        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+    </a>
+</form>
+```
+
+Terakhir untuk kostumisasi background, saya menggunakan warna pink `#ffe1f4`.
+</details>
 
 </details>

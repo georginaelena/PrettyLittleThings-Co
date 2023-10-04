@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-    <title>Log in</title>
+    <title>Login</title>
 {% endblock meta %}
 
 {% block content %}
 
-<div class = "login">
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="display: flex; align-items: center;">  <!-- agar posisi logo dan judul sejajar--> 
-                <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;"> <!-- agar ukuran logo menyesuaikan dengan judul-->
-                <span class="fw-bold fs-1">Log in</span> <!-- ukuran judul -->
-            </a>
-        </div>
-    </nav>
+<div id = "login">
+    <div class = "login">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="display: flex; align-items: center;">  <!-- agar posisi logo dan judul sejajar--> 
+                    <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;"> <!-- agar ukuran logo menyesuaikan dengan judul-->
+                    <span class="fw-bold fs-1">Login</span> <!-- ukuran judul -->
+                </a>
+            </div>
+        </nav>
 
     <form method="POST" action="">
         {% csrf_token %}
@@ -50,23 +51,5 @@
 
 </div>
 
-<style>
-    /* CSS untuk mengatur jarak antara elemen-elemen di dalam .login */
-    .login {
-        padding: 20px; /* Menambahkan padding untuk memberikan jarak pada konten dalam .login */
-    }
-
-    .login form {
-        margin-top: 20px; /* Menambahkan margin atas untuk form */
-    }
-
-    .login table {
-        margin-top: 10px; /* Menambahkan margin atas untuk tabel */
-    }
-
-    .login ul {
-        margin-top: 10px; /* Menambahkan margin atas untuk daftar pesan */
-    }
-</style>
 
 {% endblock content %}

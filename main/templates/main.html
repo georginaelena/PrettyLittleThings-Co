@@ -1,54 +1,78 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{judul}}</h1>
+    <!-- Heading -->
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="display: flex; align-items: center;">  <!-- agar posisi logo dan judul sejajar--> 
+                <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;"> <!-- agar ukuran logo menyesuaikan dengan judul-->
+                <span class="fw-bold fs-1">Pretty Little Things Shop</span>
+            </a>
+            <span class="navbar-text ml-auto">
+                Sesi terakhir login: {{ last_login }}
+            </span>
+        </div>
+    </nav>
 
-    <h5>Seller name: </h5>
-    <p>{{ name }}<p>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col">
+                <h5>User: {{ name }}</h5>
+                <h5>Item: {{ item }}</h5>
+            </div>
+        </div>
+    </div>
 
-    <h5>The Items: </h5>
-    <p>{{ item }}<p>
-
-    <h5>Price: </h5>
-    <p>{{ price }}<p>
-
-    <h5>Address: </h5>
-    <p>{{ adress }}<p>
-
-<table>
+<table class="table">
+  <thead>
     <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Date Added</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date Added</th>
     </tr>
-
+  </thead>
+  <tbody>
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
     {% for product in products %}
-        <tr>
-            <td>{{product.name}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.date_added}}</td>
-        </tr>
+    <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.date_added}}</td>
+        <td> 
+            <div class="d-flex justify-content-between">
+                <form>
+                    <a href="{% url 'main:edit_product' product.pk %}">
+                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                    </a>
+                </form>
+                <form>
+                    <a href="{% url 'main:delete_product' product.pk %}">
+                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </a>
+                </form>
+            </div>
+        </td>
+    </tr>
     {% endfor %}
+  </tbody>
 </table>
 
-<br />
+<div class="text-left mb-3"> <!-- Tambahkan class mb-3 di sini -->
+    <a href="{% url 'main:create_product' %}">
+        <button type="button" class="btn btn-primary btn-sm">Add Product</button>
+    </a>
+</div>
 
-<a href="{% url 'main:create_product' %}">
-    <button>
-        Add New Product
-    </button>
-</a>
-
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
+<div class="d-flex justify-content-start mb-3"> <!-- Tambahkan class mb-3 di sini -->
+    <form>
+        <a href="{% url 'main:logout' %}">
+            <button type="button" class="btn btn-primary btn-sm">Logout</button>
+        </a>
+    </form>
+</div>
+</div>
 
 {% endblock content %}

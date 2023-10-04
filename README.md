@@ -577,7 +577,7 @@ Dengan begitu, input form sudah selesai dibuat dan siap digunakan. Jalankan comm
 <summary> Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django </summary>
 
 # Tugas 4📙
-Projek ini dibuat dengan tujuan memenuhi Tugas 3 Pemrograman Berbasis Platform.
+Projek ini dibuat dengan tujuan memenuhi Tugas 4 Pemrograman Berbasis Platform.
 
 Saya akan menjelaskan beberapa poin-poin berikut:
 
@@ -864,6 +864,148 @@ Sebelumnya, saya telah mengatur cookie sehingga informasi pengguna yang sedang l
 pada `main.html` untuk menampilkannya.
 
 </details>
+
+
+</details>
+
+<details>
+<summary>Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS</summary>
+
+# Tugas 5✋🏻
+Projek ini dibuat dengan tujuan memenuhi Tugas 5 Pemrograman Berbasis Platform.
+
+Saya akan menjelaskan beberapa poin-poin berikut:
+- Manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+- HTML5 Tag yang saya ketahui.
+- Perbedaan antara margin dan padding.
+- Perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya.
+- Cara saya mengimplementasikan checklist secara step-by-step 
+
+## Element Selector🤖
+Element selector adalah cara untuk memilih atau menemukan elemen HTML yang ingin kita *style* berdasarkan tipe elemennya. Manfaat dalam hal:
+
+- **Kesederhanaan**. Anda dapat mengatur *style default* untuk semua elemen dengan tipe yang sama. Element selector memungkinkan Anda untuk mengatur gaya untuk semua elemen HTML dengan tipe yang sama, seperti `<p>`, `<h1>`, atau `<div>`. Ini dapat membuat kode CSS Anda lebih sederhana dan mudah dipahami.
+- **Kemudahan membaca**. Kode CSS lebih mudah dibaca karena mengikuti struktur HTML yang sudah ada, terutama bagi pengembang yang baru mengenal CSS.
+- **Efisiensi**. Anda dapat mengurangi jumlah kode CSS yang perlu ditulis karena satu aturan CSS dapat berlaku untuk banyak elemen yang sama..
+
+Waktu yang tepat untuk menggunakan element selector adalah saat pembuat ingin mengatur *style default* untuk tipe elemen HTML tertentu di seluruh situs web yang dimiliki serta ingin menghindari penggunaan kelas atau ID tambahan. Contohnya, jika Anda ingin mengubah warna teks untuk semua elemen `<p>`, Anda dapat menggunakan element selector `<p>`. Namun, perlu diingat bahwa penggunaan element selector dengan sangat luas dapat membuatnya sulit untuk menyesuaikan elemen individu jika Anda ingin mengubahnya secara berbeda. Oleh karena itu, lebih baik menggunakan kelas atau ID untuk membatasi cakupan gaya Anda dan memberikan lebih banyak fleksibilitas dalam desain.
+
+## HTML5 Tag
+HTML5 (Hypertext Markup Language versi 5) adalah bahasa markup versi terbaru yang digunakan untuk membuat dan merancang halaman web dimana memperkenalkan sejumlah elemen baru yang memberikan lebih banyak struktur dan semantik ke dalam dokumen web. Elemen-elemen ini membantu mengidentifikasi dan mengelompokkan konten dengan lebih baik. Berikut merupakan beberapa contoh HTML5 Tag yang saya gunakan pada tugas saya:
+
+- **`<div>`**:
+   - Fungsi: Digunakan untuk mengelompokkan dan memisahkan konten, sering digunakan untuk membuat wadah atau container.
+   - Contoh:
+     ```html
+     <div id="container">
+         <p>Ini adalah teks dalam div.</p>
+     </div>
+     ```
+
+- **`<a>`**:
+   - Fungsi: Digunakan untuk membuat tautan ke halaman web lain atau sumber daya online.
+   - Contoh:
+     ```html
+     <a href="https://www.example.com">Kunjungi situs web kami</a>
+     ```
+
+- **`<p>`**:
+   - Fungsi: Digunakan untuk menampilkan teks paragraf.
+   - Contoh:
+     ```html
+     <p>Ini adalah contoh paragraf.</p>
+     ```
+
+- **`<img>`**:
+   - Fungsi: Digunakan untuk menampilkan gambar pada halaman web.
+   - Contoh:
+     ```html
+     <img src="gambar.jpg" alt="Deskripsi Gambar">
+     ```
+
+
+- **`<input>`**:
+   - Fungsi: Digunakan untuk membuat elemen input dalam formulir.
+   - Contoh:
+     ```html
+     <input type="text" name="nama" placeholder="Masukkan nama Anda">
+     ```
+
+- **`<button>`**:
+   - Fungsi: Digunakan untuk membuat tombol pada halaman web.
+   - Contoh:
+     ```html
+     <button type="button">Klik Saya</button>
+     ```
+
+- **`<form>`**, **`<input>`**, dan **`<button>`** (untuk membuat formulir):
+   - Fungsi: Digunakan untuk membuat formulir interaktif yang memungkinkan pengguna mengirimkan data.
+   - Contoh:
+     ```html
+     <form action="proses.php" method="post">
+         <label for="nama">Nama:</label>
+         <input type="text" id="nama" name="nama">
+         <button type="submit">Kirim</button>
+     </form>
+     ```
+
+- **`<h1>`, `<h2>`, `<h3>`, ..., `<h6>`** (untuk heading):
+    - Fungsi: Digunakan untuk judul atau heading dengan tingkat kepentingan yang berbeda.
+    - Contoh:
+      ```html
+      <h1>Judul Utama</h1>
+      <h2>Subjudul</h2>
+      <p>Isi teks...</p>
+      ```
+
+Penting untuk diingat bahwa meskipun HTML5 menawarkan banyak tag baru, penggunaan yang tepat dari tag bergantung pada konten dan struktur halaman web Anda. Anda harus memilih tag yang sesuai dengan semantik kontennya untuk meningkatkan aksesibilitas dan SEO.
+
+## Margin vs Padding🔥
+Perbedaan antara margin dan padding adalah bagaimana keduanya memengaruhi tata letak dan tampilan elemen HTML di halaman web. Ini adalah konsep penting dalam desain web dan CSS:
+
+- **Margin:**
+   - **Margin** adalah ruang di sekitar elemen HTML, yang merupakan jarak antara elemen tersebut dengan elemen lain di sekitarnya dengan kegunaan untuk mengatur jarak antara elemen dengan elemen-elemen lain di sekitarnya atau dengan tepi halaman.
+   - **Margin** tidak memiliki latar belakang atau border, dan elemen-elemen dengan margin yang berdekatan akan memiliki jarak antara satu sama lain sesuai dengan margin masing-masing.
+
+   Contoh penggunaan margin:
+   ```css
+   .elemen {
+       margin: 10px; /* Margin sekitar elemen 10 piksel */
+   }
+   ```
+
+- **Padding:**
+   - **Padding** adalah ruang di sekitar isi dari elemen HTML, yang merupakan jarak antara konten elemen dan bordernya dengan kegunaan untuk mengatur jarak antara konten elemen dan batas atau bordernya.
+   - **Padding** memengaruhi tampilan elemen dengan memberikan ruang di sekitar kontennya.
+
+   Contoh penggunaan padding:
+   ```css
+   .elemen {
+       padding: 10px; /* Padding untuk konten elemen 10 piksel */
+   }
+   ```
+
+**Perbedaan Utama**
+
+| Margin | Padding |
+| ------ | ------- |
+|  mempengaruhi jarak antara elemen dengan elemen-elemen di sekitarnya atau dengan tepi halaman. | mempengaruhi jarak antara konten elemen dengan bordernya. |
+| tidak memiliki latar belakang atau border. | mempengaruhi bagian dalam elemen yang memiliki latar belakang atau border. |
+|mempengaruhi tata letak elemen secara global. | mempengaruhi tampilan konten elemen secara lokal di dalamnya
+
+Dalam desain web, pemahaman yang baik tentang perbedaan antara margin dan padding penting untuk mengontrol ruang dan tampilan elemen dengan tepat. Ini memungkinkan Anda untuk mengatur elemen-elemen di halaman web Anda sesuai dengan desain yang diinginkan.
+
+##  CSS Tailwind vs Bootstrap
+   Perbedaan antara Tailwind CSS dan Bootstrap
+   - **BOOTSTRAP**
+        - adalah kerangka kerja CSS yang lebih terstruktur dan datang dengan komponen UI yang siap pakai dengan desain bawaan yang kaya dengan komponen. Bootstrap memiliki gaya default yang mudah dikenali dimana tampilan khas "Bootstrap" yang dapat diubah dengan kustomisasi. Bootstrap memiliki ukuran yang lebih besar daripada Tailwind CSS karena komponen dan gaya default yang lebih banyak. 
+        - Jadi, gunakanlah Bootstrap ketika pengembang memerlukan desain yang siap pakai dengan komponen UI yang lebih banyak, ingin menghemat waktu dalam pengembangan, serta pengembang masih termasuk kedalam kategori pemula dalam penggunaan CSS.
+   - **TAILWIND CSS**
+        -  adalah kerangka kerja CSS yang memberikan kontrol yang lebih besar kepada pengembang sehingga tidak memiliki banyak desain bawaan dan mengharuskan pengembang untuk membangun desain mereka dengan cara yang lebih granular menggunakan kelas CSS. Tailwind tidak memiliki gaya default yang kuat dimana seluruh elemen dimulai dengan tampilan yang sangat sederhana, dan pengembang harus menentukan semua gaya secara eksplisit. Namun, Tailwind memiliki ukuran yang lebih ringan karena hanya menyertakan kelas yang dibutuhkan dalam kode yang dihasilkan.
+        - Jadi, gunakanlah Tailwind CSS ketika pengembang ingin total kontrol atas desain dan ingin menghindari gaya default yang berlebihan, telah memiliki pengalaman dalam menulis CSS dan ingin desain yang lebih kustom, serta ingin membangun tampilan yang ringan saja agar dapat memaksimalkan kinerja.
+
+## Implementasi Data💻
+
 
 
 </details>

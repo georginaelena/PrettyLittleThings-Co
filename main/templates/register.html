@@ -6,26 +6,34 @@
 
 {% block content %}  
 
-<div class = "login">
-    
-    <h1>Register</h1>  
+<div class="login">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="display: flex; align-items: center;">  <!-- agar posisi logo dan judul sejajar--> 
+                <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;"> <!-- agar ukuran logo menyesuaikan dengan judul-->
+                <span class="fw-bold fs-1">Register</span>
+            </a>
+        </div>
+    </nav>
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
+    <form method="POST" >  
+        {% csrf_token %}  
+        <table>  
+            {{ form.as_table }}  
+            <tr>  
+                <td></td>
+                <td>
+                    <input type="submit" name="submit" class="btn btn-primary btn-sm" value="Daftar" style="background-color: #007bff; border-color: #007bff; color: #fff;"/>
+                </td>  
+            </tr>  
+        </table>  
+    </form>
 
     {% if messages %}  
         <ul>   
             {% for message in messages %}  
                 <li>{{ message }}</li>  
-                {% endfor %}  
+            {% endfor %}  
         </ul>   
     {% endif %}
 

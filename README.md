@@ -1127,3 +1127,20 @@ Setelah itu, pada setiap button yang ada saya buat kostumisasi sebagai berikut:
 Terakhir untuk kostumisasi background, saya menggunakan warna pink `#ffe1f4`.
 
 </details>
+</details>
+
+<details>
+<summary>Tugas 6: JavaScript dan Asynchronous JavaScript</summary>
+
+# Tugas 6🔥
+Projek ini dibuat dengan tujuan memenuhi Tugas 6 Pemrograman Berbasis Platform.
+
+Saya akan menjelaskan beberapa poin-poin berikut:
+- Perbedaan antara asynchronous programming dengan synchronous programming.
+- Penjelasan paradigma event-driven programming dalam penerapan JavaScript dan AJAX
+- Penerapan asynchronous programming pada AJAX.
+- Membandingkan penerapan AJAX (menggunakan Fetch API) dengan Library JQuery 
+- Implementasi Data
+
+
+</details>

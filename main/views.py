@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 @login_required(login_url='/login')
@@ -20,7 +21,7 @@ def show_main(request):
     context = {
         'judul': 'Hi! It is Pretty Little Things Here~',
         'name': request.user.username,
-        'item': 'DIY Bracellet',
+        'item': 'your beauty accessories',
         'products': products,
         'last_login': request.COOKIES['last_login'],
     }
@@ -52,6 +53,10 @@ def show_json(request):
 def show_json(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def get_product_json(request):
+    product_item = Product.objects.all()
+    return HttpResponse(serializers.serialize('json', product_item))
 
 def show_xml_by_id(request, id):
     data = Product.objects.filter(pk=id)
@@ -116,3 +121,18 @@ def delete_product(request, id):
     product.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Product(name=name, price=price, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()

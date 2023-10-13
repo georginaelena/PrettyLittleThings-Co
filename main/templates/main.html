@@ -4,8 +4,8 @@
     <!-- Heading -->
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="display: flex; align-items: center;">  <!-- agar posisi logo dan judul sejajar--> 
-                <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;"> <!-- agar ukuran logo menyesuaikan dengan judul-->
+            <a class="navbar-brand" href="#" style="display: flex; align-items: center;"> 
+                <img src="https://i.imgur.com/Oyp81gz.png" alt="Logo" class="d-inline-block align-text-top logo-img" style="width: 10%;">
                 <span class="fw-bold fs-1">Pretty Little Things Shop</span>
             </a>
             <span class="navbar-text ml-auto">
@@ -23,61 +23,146 @@
         </div>
     </div>
 
-    <div class="container">
-        <table class="table"> <!-- Tambahkan style margin: 0 auto; untuk membuat tabel berada di tengah -->
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Date Added</th>
-                    <th scope="col">Actions</th> <!-- Kolom untuk tombol Edit dan Delete -->
-                </tr>
-            </thead>
-            <tbody>
-                {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-                {% for product in products %}
-                <tr>
-                    <td>{{product.name}}</td>
-                    <td>{{product.price}}</td>
-                    <td>{{product.description}}</td>
-                    <td>{{product.date_added}}</td>
-                    <td> 
-                        <div class="d-flex justify-content-between">
-                            <form>
-                                <a href="{% url 'main:edit_product' product.pk %}">
-                                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                </a>
-                            </form>
-                            <form>
-                                <a href="{% url 'main:delete_product' product.pk %}">
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </a>
-                            </form>
+    <!-- add product by ajax -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
                         </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-    <div class="container">
-        <div class="text-left mb-3"> <!-- Tambahkan class mb-3 di sini -->
+    <!-- <div class="row row-cols-1 row-cols-md-3 g-4" id="item_card"></div> -->
+    <!-- card product nya -->
+    <div class="container" id="item_card"> 
+        <div class="row"> <!-- Gunakan id untuk menempatkan tabel di sini -->
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">Price      : {{ product.price }}</p>
+                            <p class="card-text">Description: {{ product.description }}</p>
+                            <p class="card-text">Date Added : {{ product.date_added }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'main:edit_product' product.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'main:delete_product' product.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+    <!-- button button -->
+        <!--<div class="text-left mb-3">
             <a href="{% url 'main:create_product' %}">
                 <button type="button" class="btn btn-primary btn-sm">Add Product</button>
             </a>
+        </div> -->
+    <div class="container">
+        <div class="d-flex justify-content-start mb-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
         </div>
-
-    <div class="d-flex justify-content-start mb-3"> <!-- Tambahkan class mb-3 di sini -->
-        <form>
-            <a href="{% url 'main:logout' %}">
-                <button type="button" class="btn btn-primary btn-sm">Logout</button>
-            </a>
-        </form>
+        <div class="d-flex justify-content-start mb-3">
+            <form>
+                <a href="{% url 'main:logout' %}">
+                    <button type="button" class="btn btn-primary btn-sm">Logout</button>
+                </a>
+            </form>
+        </div>
     </div>
-</div>
+
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    // Fungsi yang menambahkan tombol "Edit" dan "Delete" ke dalam elemen card
+    async function refreshProducts() {
+        document.getElementById("item_card").innerHTML = "";
+        const products = await getProducts();
+
+        products.forEach((product) => {
+            const card = document.createElement("div");
+            card.className = "col-md-4 mb-4";
+            card.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.fields.name}</h5>
+                        <p class="card-text">Price: ${product.fields.price}</p>
+                        <p class="card-text">Description: ${product.fields.description}</p>
+                        <p class="card-text">Date Added: ${product.fields.date_added}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-primary btn-sm edit-button">Edit</a>
+                            <a href="#" class="btn btn-danger btn-sm delete-button">Delete</a>
+                        </div>
+                    </div>
+                </div>`;
+
+            // Sisipkan kartu ke dalam elemen dengan ID "item_card"
+            document.getElementById("item_card").appendChild(card);
+        });
+
+        // Tambahkan event listener untuk tombol "Edit" dan "Delete"
+        document.querySelectorAll(".edit-button").forEach((editButton, index) => {
+            editButton.addEventListener("click", async () => {
+                const productId = products[index].pk;  // Gantilah ini dengan cara Anda mendapatkan ID produk
+                const editUrl = "{% url 'main:edit_product' 0 %}".replace(0, productId); // Ganti 'main:edit_product' dengan nama URL yang sesuai
+                window.location.href = editUrl;
+            });
+        });
+
+        document.querySelectorAll(".delete-button").forEach((deleteButton, index) => {
+            deleteButton.addEventListener("click", async () => {
+                const productId = products[index].pk;  // Gantilah ini dengan cara Anda mendapatkan ID produk
+                const deleteUrl = "{% url 'main:delete_product' 0 %}".replace(0, productId); // Ganti 'main:delete_product' dengan nama URL yang sesuai
+                window.location.href = deleteUrl;
+            });
+        });
+
+    }
+
+    refreshProducts()
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addProduct
+</script>
 
 {% endblock content %}

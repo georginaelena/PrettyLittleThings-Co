@@ -137,8 +137,3 @@ def add_product_ajax(request):
 
     return HttpResponseNotFound()
 
-# def delete_ajax(request, id):
-#     product = Product.objects.get(pk = id)
-#     product.delete()
-#     print("ok")
-#     return HttpResponse(b"DELETED", status=201)

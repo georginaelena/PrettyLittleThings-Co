@@ -1358,7 +1358,7 @@ Fungsi kode di atas adalah setelah item baru dibuat, halaman akan diperbaharui s
 <details>
 <summary>Collectstatic</summary>
 
-Setelag segala implementasi telah selesai, saya menjalankan perintah `python manage.py collectstatic` pada terminal dengan menggunakan environtment (env) untuk mengumpulkan file static pada aplikasi.
+Setelah segala implementasi telah selesai, saya menjalankan perintah `python manage.py collectstatic` pada terminal dengan menggunakan environtment (env) untuk mengumpulkan file static aplikasi.
 
 </details>
 

@@ -56,22 +56,21 @@
         </div>
     </div>
 
-    <!-- <div class="row row-cols-1 row-cols-md-3 g-4" id="item_card"></div> -->
     <!-- card product nya -->
-    <div class="container" id="item_card"> 
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="item_card">  <!-- layout grid -->
         <div class="row"> <!-- Gunakan id untuk menempatkan tabel di sini -->
             {% for product in products %}
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
+                            <h5 class="card-title" style="font-weight: bold;">{{ product.name }}</h5>
                             <p class="card-text">Price      : {{ product.price }}</p>
                             <p class="card-text">Description: {{ product.description }}</p>
                             <p class="card-text">Date Added : {{ product.date_added }}</p>
-                            <div class="d-flex justify-content-between">
+                            <!-- <div class="d-flex justify-content-between">
                                 <a href="{% url 'main:edit_product' product.pk %}" class="btn btn-primary btn-sm">Edit</a>
                                 <a href="{% url 'main:delete_product' product.pk %}" class="btn btn-danger btn-sm">Delete</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -163,6 +162,8 @@
     }
 
     document.getElementById("button_add").onclick = addProduct
+
+    
 </script>
 
 {% endblock content %}

@@ -1133,14 +1133,234 @@ Terakhir untuk kostumisasi background, saya menggunakan warna pink `#ffe1f4`.
 <summary>Tugas 6: JavaScript dan Asynchronous JavaScript</summary>
 
 # Tugas 6🔥
-Projek ini dibuat dengan tujuan memenuhi Tugas 6 Pemrograman Berbasis Platform.
+Projek ini dibuat dengan tujuan memenuhi Tugas 6 Pemrograman Berbasis Platform. Berikut merupakan link hasil deployment, [georgina-elena-tugas](http://georgina-elena-tugas.pbp.cs.ui.ac.id.)
 
 Saya akan menjelaskan beberapa poin-poin berikut:
-- Perbedaan antara asynchronous programming dengan synchronous programming.
+- Perbedaan antara asynchronous programming dengan synchronous programming
 - Penjelasan paradigma event-driven programming dalam penerapan JavaScript dan AJAX
-- Penerapan asynchronous programming pada AJAX.
-- Membandingkan penerapan AJAX (menggunakan Fetch API) dengan Library JQuery 
+- Penerapan asynchronous programming pada AJAX
+- Membandingkan penerapan AJAX antara Fetch API dengan Library JQuery 
 - Implementasi Data
+
+## Asynchronous Programming vs Synchronous Programming👩🏻‍💻
+
+| Asynchronous programming | Synchronous Programming |
+| ------------------------ | ----------------------- |
+| eksekusi program tanpa ketergantungan pada proses lain (operasi independen) | program dieksekusi secara berurutan sesuai dengan urutan dan prioritasnya |
+| program dieksekusi secara bersamaan tanpa harus menunggu tugas sebelumnya selesai | program dieksekusi satu per satu, dan eksekusi program berikutnya hanya dimulai setelah program sebelumnya selesai |
+| lebih responsif dan efisien karena dapat melanjutkan eksekusi ketika tugas I/O sedang berlangsung | menghambat kinerja aplikasi dan menyebabkan aplikasi terasa "tertunda" saat menunggu tugas I/O |
+
+
+## Event-Driven Programming🚙
+
+Event-Driven Programming mengacu pada pendekatan di mana pemrograman fokus merespons peristiwa atau kejadian tertentu yang berasal dari sumber eksternal seperti masukan pengguna atau perubahan sistem. Dalam konteks JavaScript dan AJAX berarti tugas-tugas dijalankan sebagai respons terhadap peristiwa seperti klik tombol, permintaan jaringan selesai, atau interaksi pengguna lainnya. Contoh penerapannya pada aplikasi ini adalah button delete, ketika button ini ditekan (event) maka akan dijalankan fungsi deleteProduct.
+
+## Asynchronous Programming pada AJAX
+
+Pada AJAX, asynchronous programming sangat penting karena permintaan jaringan seringkali memerlukan waktu untuk menyelesaikan operasi. AJAX dengan JavaScript menggunakan metode seperti fetch atau XMLHttpRequest untuk mengirim permintaan jaringan. Kode JavaScript tidak  "menghentikan" eksekusi saat permintaan jaringan sedang berlangsung. Jadi, setelah pemuatan halaman HTML awal, data dapat diperbarui secara dinamis tanpa harus me-reload seluruh halaman web. Ini membuat interaksi lebih responsif, karena data dapat diperbarui di latar belakang tanpa mengganggu pengguna. Dengan eksekusi secara asynchronous, AJAX menjaga kecepatan dan fleksibilitas dalam menanggapi pengguna serta mempertahankan lingkungan yang didorong oleh data.
+
+## Fetch API vs Library JQuery
+
+| Fecth API | Library JQuery |
+| --------- | -------------- |
+| terdapat dalam standar JavaScript modern, tidak memerlukan pustaka tambahan | abstraksi tinggi dan mudah digunakan, mengurangi kerumitan kode | Memerlukan unduhan dan penggunaan pustaka eksternal, yang dapat memperlambat waktu muat aplikasi |
+| lebih ringan dalam hal ukuran, meningkatkan kinerja dan kecepatan aplikasi | tidak seefisien Fetch API dalam hal kinerja |
+| menyediakan fleksibilitas yang besar dalam mengelola permintaan dan respons | menyediakan berbagai fitur tambahan, seperti animasi dan manipulasi DOM | 
+| lebih rendah level abstraksi dibandingkan dengan jQuery, sehingga memerlukan penulisan kode yang lebih banyak | abstraksi tinggi dan mudah digunakan, mengurangi kerumitan kode |
+
+Dari kelebihan serta kekurangan yang ada, menurut saya teknologi yang lebih baik untuk digunakan adalah Fetch API. Hal ini saya simpulkan dengan melihat kelebihan Fetch API dalam penggunaan di banyak proyek modern dimana lebih ringan, lebih kuat, dan sesuai dengan tren saat ini.
+
+## Implementasi Data
+
+<details>
+<summary>AJAX GET</summary>
+
+Membuat fungsi untuk menampilkan data produk yang difilter untuk user yang telah login dan menambahkan path url ke urls.py.
+
+```
+def get_product_json(request):
+    product_item = Product.objects.all()
+    return HttpResponse(serializers.serialize('json', product_item))
+```
+
+Pada tugas sebelumnya saya memakai tabel bukan cards, maka dari itu saya memodifikasi tabel saya menjadi card dengan kode berikut:
+
+```
+<div class="row row-cols-1 row-cols-md-3 g-4" id="item_card"> 
+        <div class="row"> <!-- Gunakan id untuk menempatkan tabel di sini -->
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: bold;">{{ product.name }}</h5>
+                            <p class="card-text">Price      : {{ product.price }}</p>
+                            <p class="card-text">Description: {{ product.description }}</p>
+                            <p class="card-text">Date Added : {{ product.date_added }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'main:edit_product' product.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{% url 'main:delete_product' product.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+```
+
+Kemudian, membuat fungsi untuk melakukan fetch data JSON di dalam tag `<script>` pada` main.html`. Data difetch secara _asynchronous_ :
+```
+async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+```
+
+Membuat fungsi pada `<script>` yang akan memperbarui data-data secara asynchronous ketika terjadi suatu event tanpa me-reload halaman. Pada fungsi ini ada loop yang mengiterasi semua item milik user dan menampilkan atributnya dalam bentuk cards. Saya mengimplementasikan kode sebagai berikut:
+
+```
+async function refreshProducts() {
+        document.getElementById("item_card").innerHTML = "";
+        const products = await getProducts();
+
+        products.forEach((product) => {
+            const card = document.createElement("div");
+            card.className = "col-md-4 mb-4";
+            card.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.fields.name}</h5>
+                        <p class="card-text">Price: ${product.fields.price}</p>
+                        <p class="card-text">Description: ${product.fields.description}</p>
+                        <p class="card-text">Date Added: ${product.fields.date_added}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-primary btn-sm edit-button">Edit</a>
+                            <a href="#" class="btn btn-danger btn-sm delete-button">Delete</a>
+                        </div>
+                    </div>
+                </div>`;
+
+            // Sisipkan kartu ke dalam elemen dengan ID "item_card"
+            document.getElementById("item_card").appendChild(card);
+        });
+
+        // event listener untuk "Edit" button
+        document.querySelectorAll(".edit-button").forEach((editButton, index) => {
+            editButton.addEventListener("click", async () => {
+                const productId = products[index].pk;  // Gantilah ini dengan cara Anda mendapatkan ID produk
+                const editUrl = "{% url 'main:edit_product' 0 %}".replace(0, productId); // Ganti 'main:edit_product' dengan nama URL yang sesuai
+                window.location.href = editUrl;
+            });
+        });
+
+        // event listener untuk "Delete" button
+        document.querySelectorAll(".delete-button").forEach((deleteButton, index) => {
+            deleteButton.addEventListener("click", async () => {
+                const productId = products[index].pk;  // Gantilah ini dengan cara Anda mendapatkan ID produk
+                const deleteUrl = "{% url 'main:delete_product' 0 %}".replace(0, productId); // Ganti 'main:delete_product' dengan nama URL yang sesuai
+                window.location.href = deleteUrl;
+            });
+        });
+
+    }
+
+
+```
+
+
+
+</details>
+<details>
+<summary>AJAX POST</summary>
+
+Dalam implementasi AJAX POST, saya membuat sebuah tombol yang akan membuka sebuah modal dengan form untuk menambahkan item.
+
+**Button**
+```
+<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item by AJAX</button>
+```
+
+**Modal**
+```
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #D4D4E7;">
+                <h1 class="modal-title fs-5" id="addItemModalLabel">Add New Item</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color: #E4E4F0;">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: #D4D4E7;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light" id="button_add" data-bs-dismiss="modal">Add Item</button>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+Lalu, pada file `views.py` di direktori `main` saya membuat fungsi view baru untuk menambahkan item baru ke dalam database dengan kode berikut:
+```
+@csrf_exempt
+def create_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_item = Item(name=name, amount=amount, description=description, user=user)
+        new_item.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+```
+
+Kemudian, pada file `urls.py` di direktori `main`, saya menambahkan path:
+```
+...
+path('create-ajax/', create_ajax, name='create_ajax'),
+```
+
+Selanjutnya form dalam modal yang sudah dibuat, saya disambungkan ke path `/create-ajax/` dengan membuat fungsi pada blok `<script>`, kode sebagai berikut:
+```
+function addProduct() {
+    fetch("{% url 'main:create_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    }).then(refreshProducts)
+
+    document.getElementById("form").reset()
+    return false
+}
+```
+
+Fungsi kode di atas adalah setelah item baru dibuat, halaman akan diperbaharui secara asynchronous dengan dipanggilnya fungsi refreshProduct.
+
+
+</details>
+<details>
+<summary>Collectstatic</summary>
+
+Setelag segala implementasi telah selesai, saya menjalankan perintah `python manage.py collectstatic` pada terminal dengan menggunakan environtment (env) untuk mengumpulkan file static pada aplikasi.
+
+</details>
 
 
 </details>
